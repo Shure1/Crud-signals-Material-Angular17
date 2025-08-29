@@ -1,0 +1,9 @@
+<section>
+  <div class="button-primary">
+    <button mat-raised-button color="primary" (click)="openModalCreate()">Crear Usuario</button>
+  </div>
+  <app-table [data]="userSignal()" [displayedColumns]="displayedColumns" [sortableColumns]="sortables"
+    (applicationUpdate)="openModalUpdate($event)" (applicationDelete)="deleteUser($event)">
+  </app-table>
+
+</section>

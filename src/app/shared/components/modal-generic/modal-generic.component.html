@@ -1,0 +1,68 @@
+<div class="main-content">
+  <div class="btn-modal header">
+    <h2 mat-dialog-title>Editar Usuario</h2>
+    <button (click)="dialogClose()" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content [formGroup]="userForm">
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Nombre Completo</mat-label>
+      <input matInput formControlName="fullName">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Fecha Nacimiento</mat-label>
+      <input matInput formControlName="birthDate" [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="field">
+      <mat-label>Dirección Principal</mat-label>
+      <input matInput formControlName="mainAddress">
+    </mat-form-field>
+
+    <div formArrayName="secondaryAddresses">
+      <div class="addresses-header">
+        <span>Direcciones Secundarias</span>
+        <button mat-stroked-button color="primary" type="button" (click)="addSecondaryAddress()">Añadir
+          Dirección</button>
+      </div>
+
+      <table class="addresses-table">
+        <thead>
+          <tr>
+            <th>Dirección</th>
+            <th>Marcar como Principal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(addrCtrl of secondaryAddressesControl.controls; track addrCtrl; let i = $index) {
+          <tr [formGroupName]="i">
+            <td>
+              <mat-form-field appearance="outline" class="field">
+                <input matInput formControlName="address">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-checkbox formControlName="isMain" (change)="setAsMain(i)"></mat-checkbox>
+            </td>
+          </tr>
+          }
+
+        </tbody>
+      </table>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="btn-modal">
+    <button mat-flat-button color="primary" (click)="sendData()">Guardar</button>
+  </mat-dialog-actions>
+</div>

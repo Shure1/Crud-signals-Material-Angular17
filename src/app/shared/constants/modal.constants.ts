@@ -1,0 +1,1 @@
+export const MODAL_CONFIG = { autoFocus: false, disableClose: true, maxHeight: '100vh', maxWidth: '100vw', panelClass: 'newModal' };
